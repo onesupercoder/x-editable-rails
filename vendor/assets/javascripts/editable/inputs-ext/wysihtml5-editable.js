@@ -86,7 +86,11 @@ $(function(){
 
         value2input: function(value) {
             value = (this.valueIsEncoded ? this.base65decode(value) : value);
-            this.$input.data("wysihtml5").editor.setValue(value, true);
+            this.$input.data("wysihtml5").editor.setValue(value);
+        },
+
+        input2value: function() {
+            return this.$input.data("wysihtml5").editor.getValue();
         },
 
         base65decode: function(value) {
