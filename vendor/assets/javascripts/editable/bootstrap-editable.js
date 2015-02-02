@@ -187,7 +187,6 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
                 if(msg) {
                     lines = (''+msg).split('\n');
                     for (var i = 0; i < lines.length; i++) {
-                    	console.log(lines[i]);
                         lines[i] = $('<div>').html(lines[i]).html();
                     }
                     msg = lines.join('<br>');
