@@ -23,8 +23,6 @@ unless EditableForm
 
         if nestedName
           nested          = {}
-          console.log(myName)
-          console.log(nowrap)
           
           if nowrap
             nested        = myValue
