@@ -36,6 +36,7 @@ module X
             model   = object.class.name.split('::').last.underscore
             nid     = options.delete(:nid)
             nested  = options.delete(:nested)
+            nowrap  = options.delete(:nowrap)
             title   = options.delete(:title) do
               klass = nested ? object.class.const_get(nested.to_s.singularize.capitalize) : object.class
               klass.human_attribute_name(method)
@@ -60,7 +61,8 @@ module X
               source: source,
               url:    url,
               nested: nested,
-              nid:    nid
+              nid:    nid,
+              nowrap: nowrap
             }.merge(options)
 
             data.reject!{|_, value| value.nil?}
