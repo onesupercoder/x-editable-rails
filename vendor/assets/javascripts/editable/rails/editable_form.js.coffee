@@ -22,11 +22,8 @@ unless EditableForm
 
         if nestedName
           nested          = {}
-          
-          if myName
-            nested[myName]  = myValue
-          else
-            nested = myValue
+          console.log(myName)
+          nested[myName]  = myValue
             
           nested['id']    = nestedId
 
