@@ -22,7 +22,12 @@ unless EditableForm
 
         if nestedName
           nested          = {}
-          nested[myName]  = myValue
+          
+          if myName
+            nested[myName]  = myValue
+          else
+            nested = myValue
+            
           nested['id']    = nestedId
 
           if nestedLocale
