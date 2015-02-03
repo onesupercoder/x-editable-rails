@@ -6,6 +6,7 @@ unless EditableForm
     nestedName    = @options.nested
     nestedId      = @options.nid
     nestedLocale  = @options.locale
+    nowrap        = @options.nowrap
 
     @options.url = (params) =>
       if typeof originalUrl == 'function'
@@ -23,7 +24,12 @@ unless EditableForm
         if nestedName
           nested          = {}
           console.log(myName)
-          nested[myName]  = myValue
+          console.log(nowrap)
+          
+          if nowrap
+            nested        = myValue
+          else
+            nested[myName]= myValue
             
           nested['id']    = nestedId
 
