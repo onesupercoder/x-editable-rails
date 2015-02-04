@@ -74,7 +74,7 @@ module X
             })
 
             content_tag tag, html_options do
-              safe_join(source_values_for(value, source), tag(:br)) unless %w(select checklist).include? data[:type]
+              safe_join(source_values_for(value, source), tag(:br)) unless %w(select checklist textarea).include? data[:type]
             end
           else
             error || safe_join(source_values_for(value, source), tag(:br))
