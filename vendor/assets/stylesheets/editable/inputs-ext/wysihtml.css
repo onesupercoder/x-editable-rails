@@ -1,0 +1,8 @@
+[data-wysihtml5-dialog] {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+[data-wysihtml5-dialog] .btn-primary {
+  margin: 0 5px;
+}
