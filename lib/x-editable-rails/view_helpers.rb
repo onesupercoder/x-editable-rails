@@ -24,15 +24,15 @@ module X
           # merge data attributes for backwards-compatibility
           options.merge! options.delete(:data){ Hash.new }
 
-          url     = options.delete(:url){ polymorphic_path(object) }
           object  = object.last if object.kind_of?(Array)
-          value   = options.delete(:value){ object.send(method) }
-          source  = options[:source] ? format_source(options.delete(:source), value) : default_source_for(value)
-          classes = format_source(options.delete(:classes), value)
-          error   = options.delete(:e)
-          html_options = options.delete(:html){ Hash.new }
 
           if xeditable?(object)
+            url     = options.delete(:url){ polymorphic_path(object) }
+            value   = options.delete(:value){ object.send(method) }
+            source  = options[:source] ? format_source(options.delete(:source), value) : default_source_for(value)
+            classes = format_source(options.delete(:classes), value)
+            error   = options.delete(:e)
+            html_options = options.delete(:html){ Hash.new }
             model   = object.class.name.split('::').last.underscore
             nid     = options.delete(:nid)
             nested  = options.delete(:nested)
