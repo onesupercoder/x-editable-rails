@@ -66,6 +66,7 @@ module X
             }.merge(options)
 
             data.reject!{|_, value| value.nil?}
+            data.delete(:value) if type == "wysihtml"
 
             html_options.update({
               class: css,
