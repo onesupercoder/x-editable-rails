@@ -123,11 +123,13 @@ module X
             'select'
           when Array
             'checklist'
-          when ActiveSupport::TimeWithZone, Date
+          when Date, Time
             'date'
           else
             if source.is_a?(Hash)
               'select'
+            elsif value.respond_to?(:utc)
+              'date'
             else
               'text'
             end
