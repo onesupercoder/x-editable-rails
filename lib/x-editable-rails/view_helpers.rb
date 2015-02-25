@@ -114,7 +114,7 @@ module X
             values.map{|item| source[output_value_for item]}
           elsif source && type=='select2' && source.first.is_a?(Hash)
             #example source: User.all.map{|u| {id: u.id.to_s, text: u.public_name}}
-            source.detect {|f| f["id"] == value }.values[0]
+            source.detect {|f| f["id"] == value }.values-[value]
           else
             values
           end
