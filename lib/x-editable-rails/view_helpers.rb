@@ -75,10 +75,10 @@ module X
             })
 
             content_tag tag, html_options do
-              safe_join(source_values_for(value, source), tag(:br)) unless %w(select checklist textarea).include? data[:type]
+              safe_join(source_values_for(value, source, type), tag(:br)) unless %w(select checklist textarea).include? data[:type]
             end
           else
-            error || safe_join(source_values_for(value, source), tag(:br))
+            error || safe_join(source_values_for(value, source, type), tag(:br))
           end
         end
 
@@ -105,13 +105,16 @@ module X
           value
         end
 
-        def source_values_for(value, source = nil)
+        def source_values_for(value, source = nil, type=nil)
           source ||= default_source_for value
 
           values = Array.wrap(value)
 
           if source && ( source.first.is_a?(String) || source.kind_of?(Hash) )
             values.map{|item| source[output_value_for item]}
+          elsif source && type=='select2' && source.first.is_a?(Hash)
+            #example source: User.all.map{|u| {id: u.id.to_s, text: u.public_name}}
+            source.detect {|f| f["id"] == value }.values[0]
           else
             values
           end
