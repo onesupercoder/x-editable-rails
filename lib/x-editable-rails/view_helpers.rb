@@ -96,7 +96,7 @@ module X
             value.map{|item| output_value_for item}.join(',')
           else
             if value.class == String && value.include?("\n")
-              value.to_s.gsub("\n", '&#10;').html_safe
+              value.to_s.gsub("\n", '&#10;').gsub('"', '&quot;').html_safe
             else
               value.to_s
             end
