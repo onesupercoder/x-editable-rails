@@ -60,6 +60,7 @@ module X
               classes: classes,
               source: source,
               url:    url,
+              pk: object.id,
               nested: nested,
               nid:    nid,
               nowrap: nowrap
