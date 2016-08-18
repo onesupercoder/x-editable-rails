@@ -2,6 +2,12 @@
     "use strict";
 
     var wysihtml5ParserRules = {
+      "classes": "any",
+      "classes_blacklist": {
+          "Apple-interchange-newline": 1,
+          "MsoNormal": 1,
+          "MsoPlainText": 1
+      },
       tags: {
         strong: {},
         b: {},
@@ -38,6 +44,55 @@
                 align: "align_img"
             }
         },
+        "table": {
+            "keep_styles": {
+                "width": 1,
+                "textAlign": 1,
+                "float": 1
+            },
+            "check_attributes": {
+                "id": "any",
+                "class": "any"
+            }
+        },
+        "tbody": {
+            "keep_styles": {
+                "textAlign": /^((left)|(right)|(center)|(justify))$/i,
+                "float": 1
+            },
+            "add_style": {
+                "align": "align_text"
+            },
+            "check_attributes": {
+                "id": "any"
+            }
+        },
+        "tr": {
+            "add_style": {
+                "align": "align_text"
+            },
+            "check_attributes": {
+                "id": "any"
+            }
+        },
+        "td": {
+            "check_attributes": {
+                "rowspan": "numbers",
+                "colspan": "numbers",
+                "valign": "any",
+                "align": "any",
+                "id": "any",
+                "class": "any"
+            },
+            "keep_styles": {
+                "backgroundColor": 1,
+                "width": 1,
+                "height": 1
+            },
+            "add_style": {
+                "align": "align_text"
+            }
+        }
       }
     };
 
@@ -111,6 +166,9 @@
                 '<div class="btn-group">' +
                     '<a class="btn btn-small" unselectable="on" href="javascript:;" data-wysihtml5-command="insertImage"><i class="icon-picture"></i></a>' +
                 '</div>' +
+                '<div class="btn-group">' +
+                    '<a class="btn btn-small" unselectable="on" href="javascript:;" data-wysihtml5-command="createTable"><i class="icon-th-large"></i></a>' +
+                '</div>' +
                 '<div class="btn-group pull-right">' +
                     '<button type="submit" class="btn btn-small editable-cancel"><i class="icon-remove"></i></button>' +
                 '</div>' +
@@ -128,6 +186,28 @@
                 '<a data-wysihtml5-dialog-action="save" class="btn btn-primary btn-small">OK</a>' +
                 '<a data-wysihtml5-dialog-action="cancel" class="btn btn-small">Cancel</a>' +
             '</div>' +
+            '<div data-wysihtml5-dialog="createTable" style="display: none;">' +
+              '<input type="text" data-wysihtml5-dialog-field="rows" placeholder="Rows" class="input-mini" />&nbsp;x&nbsp;' +
+              '<input type="text" data-wysihtml5-dialog-field="cols" placeholder="Cols" class="input-mini" />' +
+              '<input type="hidden" data-wysihtml5-dialog-field="tableClass" value="table table-condensed table-bordered" />' +
+              '<a data-wysihtml5-dialog-action="save" class="btn btn-primary btn-small">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel" class="btn btn-small">Cancel</a>' +
+            '</div>' +
+            '<div class="block" data-wysihtml5-hiddentools="table" style="display: none;">' +
+              '<div class="btn-toolbar">' +
+                '<div class="btn-group">' +
+                  '<a class="btn btn-small" data-wysihtml5-command="mergeTableCells">Merge</a>' +
+                  '<a class="btn btn-small" data-wysihtml5-command="addTableCells" data-wysihtml5-command-value="above"><i class="icon-plus"></i> Row Before</a>' +
+                  '<a class="btn btn-small" data-wysihtml5-command="addTableCells" data-wysihtml5-command-value="below"><i class="icon-plus"></i> Row After</a>' +
+                  '<a class="btn btn-small" data-wysihtml5-command="addTableCells" data-wysihtml5-command-value="before"><i class="icon-plus"></i> Column Before</a>' +
+                  '<a class="btn btn-small" data-wysihtml5-command="addTableCells" data-wysihtml5-command-value="after"><i class="icon-plus"></i> Column After</a>' +
+                '</div>' +
+                '<div class="btn-group">' +
+                  '<a class="btn btn-small" data-wysihtml5-command="deleteTableCells" data-wysihtml5-command-value="row"><i class="icon-minus"></i> Row</a>' +
+                  '<a class="btn btn-small" data-wysihtml5-command="deleteTableCells" data-wysihtml5-command-value="column"><i class="icon-minus"></i> Column</a>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+
         '</div>' +
         '<div class="editor"></div>',
         inputclass: 'editable-wysihtml',

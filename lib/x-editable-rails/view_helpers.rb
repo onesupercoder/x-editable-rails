@@ -55,11 +55,12 @@ module X
               type:   type,
               model:  model,
               name:   method,
-              value:  ( type == 'wysihtml5' ? Base64.encode64(output_value) : output_value ), 
+              value:  ( type == 'wysihtml5' ? Base64.encode64(output_value) : output_value ),
               placeholder: placeholder,
               classes: classes,
               source: source,
               url:    url,
+              pk: object.id,
               nested: nested,
               nid:    nid,
               nowrap: nowrap
